@@ -39,7 +39,7 @@ def main():
             files = os.listdir(os.getcwd()+'/resources')
             
 
-            path_to_file = os.getcwd() + f"/resources/{counter%12}.jpeg"
+            path_to_file = os.getcwd() + f"/resources/{counter%len(files)-1}.jpeg"
             file = client.upload_file(path_to_file)
             client(UploadProfilePhotoRequest(file))
             counter+=1
