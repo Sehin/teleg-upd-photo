@@ -3,7 +3,10 @@ import time
 from argparse import ArgumentParser
 from datetime import datetime
 
-from src.generators.generate_quote_image import generate_and_save_quote
+import requests
+
+from src.generators.generate_quote_image import (generate_and_save_quote,
+                                                 get_shiba)
 from telethon.sync import TelegramClient
 from telethon.tl.functions.photos import (DeletePhotosRequest,
                                           UploadProfilePhotoRequest)
@@ -29,20 +32,14 @@ def main():
     client.start()
 
     prev_update_time = ""
-    counter = 1
     while True:
         if time_has_changed(prev_update_time):
             prev_update_time = convert_time_to_string(datetime.now())
-            # client(DeletePhotosRequest(client.get_profile_photos('me')))
+            get_shiba()
             client(DeletePhotosRequest(client.get_profile_photos('me', limit=1)))
-
-            files = os.listdir(os.getcwd()+'/resources')
-            
-
-            path_to_file = os.getcwd() + f"/resources/{counter%len(files)-1}.jpeg"
-            file = client.upload_file(path_to_file)
+            file = client.upload_file(os.getcwd()+'/src/generators/shiba.jpg')
             client(UploadProfilePhotoRequest(file))
-            counter+=1
+            os.remove(os.getcwd()+'/src/generators/shiba.jpg')
         time.sleep(1)
 
 if __name__ == '__main__':

@@ -1,12 +1,14 @@
-import cv2
-import numpy as np
-from PIL import ImageFont, ImageDraw, Image
-import requests
+import os
 import re
 import textwrap
+import urllib
 from datetime import datetime
-import os
 
+import requests
+
+import cv2
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
 
 quotes = []
 
@@ -29,6 +31,13 @@ def get_quote():
         r = requests.post("http://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=xml&lang=ru")
         quote = re.findall(".*<quoteText>(.*)</quoteText>", r.text)[0]
     return quote, author
+
+
+def get_shiba():
+    r = requests.get("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false")
+    photo_url = re.findall(".*"(.*)"", r.text)[0]
+    photo_file = urllib.URLopener()
+    photo_file.retrieve(photo_url, "shiba.jpg")
 
 def generate_image_with_text():
     image = get_black_background()
