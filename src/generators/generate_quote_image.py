@@ -40,7 +40,7 @@ def get_shiba():
     # photo_file = urllib.URLopener()
     # photo_file.retrieve(photo_url, "shiba.jpg")
     print(photo_url)
-    urllib.request.urlretrieve(photo_url, "shiba.jpg")
+    # urllib.request.urlretrieve(photo_url, "shiba.jpg")
 
 
 
