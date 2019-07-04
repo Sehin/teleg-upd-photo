@@ -43,7 +43,7 @@ def get_shiba():
             # photo_file.retrieve(photo_url, "shiba.jpg")
             print(photo_url)
             urllib.request.urlretrieve(photo_url, "shiba.jpg")
-            break
+            
 
         except Exception as e:
             print(e)
