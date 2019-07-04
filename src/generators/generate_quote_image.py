@@ -45,7 +45,7 @@ def get_shiba():
 
 
     filename = "shiba.jpg"
-    r = requests.get(url, allow_redirects=True)
+    r = requests.get(photo_url, allow_redirects=True)
     open(filename, 'wb').write(r.content)
             
 
