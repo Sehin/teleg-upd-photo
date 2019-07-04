@@ -35,7 +35,7 @@ def get_quote():
 
 def get_shiba():
     r = requests.get("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false")
-    photo_url = re.findall(".*"(.*)"", r.text)[0]
+    photo_url = re.findall('.*"(.*)"', r.text)[0]
     photo_file = urllib.URLopener()
     photo_file.retrieve(photo_url, "shiba.jpg")
 
