@@ -1,8 +1,9 @@
 import os
 import re
 import textwrap
-import urllib.request
+import time
 from datetime import datetime
+from urllib.request import urlopen
 
 import requests
 
@@ -34,12 +35,17 @@ def get_quote():
 
 
 def get_shiba():
-    r = requests.get("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false")
-    photo_url = re.findall('.*"(.*)"', r.text)[0]
+    try:
+        r = requests.get("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false")
+        photo_url = re.findall('.*"(.*)"', r.text)[0]
     # photo_file = urllib.URLopener()
     # photo_file.retrieve(photo_url, "shiba.jpg")
-    print(photo_url)
-    urllib.request.urlretrieve(photo_url, "shiba.jpg")
+        print(photo_url)
+        urllib.request.urlretrieve(photo_url, "shiba.jpg")
+        break
+    except Exception as e:
+        print(e)
+        time.sleep(5)
 
 def generate_image_with_text():
     image = get_black_background()
