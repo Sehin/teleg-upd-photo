@@ -38,7 +38,7 @@ def get_shiba():
     photo_url = re.findall('.*"(.*)"', r.text)[0]
     # photo_file = urllib.URLopener()
     # photo_file.retrieve(photo_url, "shiba.jpg")
-    urllib.request.urlretrieve(url, "shiba.jpg")
+    urllib.request.urlretrieve(photo_url, "shiba.jpg")
 
 def generate_image_with_text():
     image = get_black_background()
