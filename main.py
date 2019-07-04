@@ -37,9 +37,9 @@ def main():
             prev_update_time = convert_time_to_string(datetime.now())
             get_shiba()
             client(DeletePhotosRequest(client.get_profile_photos('me', limit=1)))
-            file = client.upload_file(os.getcwd()+'/src/generators/shiba.jpg')
+            file = client.upload_file(os.getcwd()+'/shiba.jpg')
             client(UploadProfilePhotoRequest(file))
-            os.remove(os.getcwd()+'/src/generators/shiba.jpg')
+            os.remove(os.getcwd()+'/shiba.jpg')
         time.sleep(1)
 
 if __name__ == '__main__':
