@@ -1,11 +1,13 @@
-from telethon.sync import TelegramClient
-from telethon.tl.functions.photos import UploadProfilePhotoRequest, DeletePhotosRequest
-from datetime import datetime
-import time
 import os
-
+import time
 from argparse import ArgumentParser
+from datetime import datetime
+
 from src.generators.generate_quote_image import generate_and_save_quote
+from telethon.sync import TelegramClient
+from telethon.tl.functions.photos import (DeletePhotosRequest,
+                                          UploadProfilePhotoRequest)
+
 
 def set_arguments(arg_parser: ArgumentParser):
     arg_parser.add_argument("--api_id", default=None)
@@ -29,16 +31,20 @@ def main():
     prev_update_time = ""
 
     while True:
+        counter = 1
         if time_has_changed(prev_update_time):
-            generate_and_save_quote()
             prev_update_time = convert_time_to_string(datetime.now())
             # client(DeletePhotosRequest(client.get_profile_photos('me')))
             client(DeletePhotosRequest(client.get_profile_photos('me', limit=1)))
-            path_to_file = os.getcwd() + f"/src/quote_images/new_quote.jpg"
+
+            files = os.listdir(os.getcwd()+'/resources')
+            
+
+            path_to_file = os.getcwd() + f"/resources/{counter%12}.jpeg"
             file = client.upload_file(path_to_file)
             client(UploadProfilePhotoRequest(file))
+            counter+=1
         time.sleep(1)
 
 if __name__ == '__main__':
     main()
-
