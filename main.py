@@ -29,9 +29,8 @@ def main():
     client.start()
 
     prev_update_time = ""
-
+    counter = 1
     while True:
-        counter = 1
         if time_has_changed(prev_update_time):
             prev_update_time = convert_time_to_string(datetime.now())
             # client(DeletePhotosRequest(client.get_profile_photos('me')))
