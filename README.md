@@ -7,11 +7,16 @@
 
 Now, clone project.
 Install requirements:
- > python -m venv venv
- > cd */venv/Scripts
- > activate.(bat/sh)
- > cd */src
- > pip install -r requirements.txt
+
+> python -m venv venv
+ 
+> cd */venv/Scripts
+ 
+> activate.(bat/sh)
+ 
+> cd */src
+ 
+> pip install -r requirements.txt
  
  Run project in src folder
- > python main.py --api_id={YOUR_API_ID} --api_hash={YOUR_API_HASH}
+> python main.py --api_id={YOUR_API_ID} --api_hash={YOUR_API_HASH}
